@@ -22,23 +22,17 @@
           cpf: '',
           data_nascimento: '',
           data_admissao: '',
-          // Outros campos de registro
         },
       };
     },
     methods: {
       editarRegistro() {
-        // Adicione a lógica para editar o registro
       },
       excluirRegistro() {
-        // Adicione a lógica para excluir o registro
       },
     },
     created() {
-      // Use this.$route.params.id para obter o ID do registro da rota
       const registroId = this.$route.params.id;
-      // Recupere os detalhes do registro com base no ID
-      // Atualize o objeto 'registro' com os detalhes do registro
     },
   };
   </script>

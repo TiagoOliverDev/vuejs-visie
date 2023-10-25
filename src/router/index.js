@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Detalhes from '../components/Detalhes.vue';
+import Detalhes from '../components/DetalhesPessoa.vue';
 
 const routes = [
  

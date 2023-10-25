@@ -1,17 +1,391 @@
-<!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+<title>Teste Visie Web</title>
+</head>
+<body>
+<div class="container" id="vuejscrudapp">
+    <div class="row">
+        <div class="col-md-12 mt-5">
+          <h1 class="text-center">Teste Visie Web</h1>
+          <hr>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-md-12">    
+  
+<!-- Modal Editar dados -->
+<div>
+  <b-modal ref="my-modal1" hide-footer title="Atualizar dados de registro">
+      <div>
+          <form action="" @submit.prevent="onUpdate">
+              <div class="form-group">
+                  <label for="">Nome</label>
+                  <input type="text" v-model="edit_nome" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label for="">RG</label>
+                  <input type="text" v-model="edit_rg" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label for="">CPF</label>
+                  <input type="text" v-model="edit_cpf" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label for="">DATA NASCIMENTO</label>
+                  <input type="text" v-model="edit_data_nascimento" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label for="">DATA ADMISSÃO</label>
+                  <input type="text" v-model="edit_data_admissao" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label for="">FUNÇÃO</label>
+                  <input type="text" v-model="edit_funcao" class="form-control">
+              </div>
+              <div class="d-flex justify-content-between mt-4">
+                  <button class="btn btn-sm btn-outline-info mr-2">Editar</button>
+                  <b-button variant="outline-danger" @click="hideModal('my-modal1')">Cancelar</b-button>
+              </div>
+          </form>
+      </div>
+  </b-modal>
+</div>
+
+<!-- Modal ver mais -->
+<div>
+  <b-modal ref="modal-ver-mais" hide-footer title="Dados completos">
+      <div>
+          <form action="">
+              <div class="form-group">
+                  <label for="">Nome</label>
+                  <input type="text" v-model="edit_nome" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label for="">RG</label>
+                  <input type="text" v-model="edit_rg" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label for="">CPF</label>
+                  <input type="text" v-model="edit_cpf" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label for="">DATA NASCIMENTO</label>
+                  <input type="text" v-model="edit_data_nascimento" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label for="">DATA ADMISSÃO</label>
+                  <input type="text" v-model="edit_data_admissao" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label for="">FUNÇÃO</label>
+                  <input type="text" v-model="edit_funcao" class="form-control">
+              </div>
+              <div class="d-flex justify-content-between mt-4">
+                  <button @click="onUpdate(records.id)" class="btn btn-sm btn-outline-info mr-2">Editar</button>
+                  <button @click="deleteRegister(records.id)" class="btn btn-sm btn-outline-danger">Excluir</button>
+                  <!-- <b-button variant="outline-danger" @click="deleteRegister(record.id)" >Excluir</b-button> -->
+              </div>
+          </form>
+      </div>
+  </b-modal>
+</div>
+
+  <!-- Modal ver mais
+  <div>
+    <b-modal ref="modal-ver-mais" hide-footer title="Todos os dados">
+      <div>
+        <div class="form-group">
+          <label for="">Nome: </label>
+          <strong>{{ edit_nome }}</strong>
+        </div>
+        <div class="form-group">
+          <label for="">RG:</label>
+          <strong>{{ edit_rg }}</strong>
+        </div>
+        <div class="form-group">
+          <label for="">CPF:</label>
+          <strong>{{ edit_cpf }}</strong>
+        </div>
+        <div class="form-group">
+          <label for="">DATA NASCIMENTO:</label>
+          <strong>{{ edit_data_nascimento }}</strong>
+        </div>
+        <div class="form-group">
+          <label for="">DATA ADMISSÃO:</label>
+          <strong>{{ edit_data_admissao }}</strong>
+        </div>
+        <div class="form-group">
+          <label for="">FUNÇÃO:</label>
+          <strong>{{ edit_funcao }}</strong>
+        </div>
+      </div>
+      <b-button class="mt-3" variant="outline-danger" block @click="hideModal('modal-ver-mais')">Fechar</b-button>
+    </b-modal>
+  </div> -->
+           
+    </div>
+    </div>
+       
+    <div class="row">
+        <div class="col-md-12">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <!-- <th>ID</th> -->
+                <th>Nome</th>
+                <th>DATA ADMISSÃO</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(record, i) in records" :key="record.id">
+                <td>{{formatFirstName(record.nome)}}</td>
+                <td>{{formatDataAdmissaoEnascimento(record.data_admissao)}}</td>
+                <td>
+                  <button @click="deleteRegister(record.id)" class="btn btn-sm btn-outline-danger">Excluir</button>
+                  <button @click="editRegister(record.id)" class="btn btn-sm btn-outline-info">Editar</button>
+                  <button @click="allDataById(record.id)" class="btn btn-sm btn-outline-info">Ver Mais</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+    <div>
+      <b-button id="show-btn" @click="showModal('my-modal')">Adicionar registro</b-button>
+  
+      <b-modal ref="my-modal" hide-footer title="Cadastrar dados">
+          <div>
+              <form action="" @submit.prevent="onSubmit">
+                  <div class="form-group">
+                      <label for="">Nome</label>
+                      <input type="text" v-model="nome" class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="">RG</label>
+                      <input type="text" v-model="rg" class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="">CPF</label>
+                      <input type="text" v-model="cpf" class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="">DATA NASCIMENTO</label>
+                      <input type="text" v-model="data_nascimento" class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="">DATA ADMISSÃO</label>
+                      <input type="text" v-model="data_admissao" class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="">FUNÇÃO</label>
+                      <input type="text" v-model="funcao" class="form-control">
+                  </div>
+                  <div class="d-flex justify-content-between mt-4">
+                      <button class="btn btn-sm btn-outline-info mr-2">Cadastrar</button>
+                      <b-button variant="outline-danger" @click="hideModal('my-modal')">Cancelar</b-button>
+                  </div>
+              </form>
+          </div>
+      </b-modal>
+  </div>
+  
+</div>
+  
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<!-- BootstrapVue js -->
+<script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+<!-- Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#vuejscrudapp',
+        data: {
+            nome: '',
+            rg: '',
+            cpf: '',
+            data_nascimento: '',
+            data_admissao: '',
+            funcao: '',
+            records: [],
+            edit_id: '',
+            edit_nome: '',
+            edit_rg: '',
+            edit_cpf: '',
+            edit_data_nascimento: '',
+            edit_data_admissao: '',
+            edit_funcao: '',
+        },
+
+        methods: {
+            verDetalhes(id) {
+              this.$router.push({ name: 'detalhes', params: { id } });
+            },
+
+            formatFirstName(fullName) {
+                return fullName.split(' ')[0]; 
+            },
+
+            formatDataAdmissaoEnascimento(date) {
+                const originalDate = new Date(date);
+                originalDate.setMinutes(originalDate.getMinutes() + originalDate.getTimezoneOffset()); // Ajusta o fuso horário
+                const formattedDate = originalDate.toLocaleDateString('pt-BR');
+                return formattedDate;
+            },
+
+            deleteRegisterVerMais() {
+              if (window.confirm('Tem certeza que deseja excluir este registro?')) {
+                deleteRegister(records.id)
+                this.hideModal('modal-ver-mais');
+              }
+            },
+
+            showModal(id) {
+                this.$refs[id].show()
+            },  
+
+            hideModal(id) {
+                this.$refs[id].hide()
+            },        
+            
+            onSubmit(){
+                if (this.nome !== '' && this.rg !== '' && this.cpf !== '' && this.data_nascimento !== '' && this.data_admissao !== '' && this.funcao !== '') {
+                    var config = { headers: {  
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'}
+                    }
+                    axios.post("http://127.0.0.1:5000/insert", 
+                        { nome : this.nome, rg : this.rg, cpf : this.cpf, data_nascimento : this.data_nascimento, data_admissao : this.data_admissao, funcao : this.funcao}, config
+                    )
+                    .then(res => {
+                        console.log(res)
+                        alert('Novo registro cadastrado com sucesso!')
+                        
+                        this.nome = '';
+                        this.rg = '';
+                        this.cpf = '';
+                        this.data_nascimento = '';
+                        this.data_admissao = '';
+                        this.funcao = '';
+          
+                        app.hideModal('my-modal')
+                        app.getRecords()
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+                }else{
+                  alert('Vázio')
+                }
+            },
+  
+            getRecords(){
+                axios({
+                  url: 'http://localhost:5000/',
+                  method: 'get'
+                })
+                .then(res => {
+                  this.records = res.data.peoples
+                })
+                .catch(err => {
+                  console.log(err)
+                })
+            },
+  
+            editRegister(id){
+                axios.get("http://127.0.0.1:5000/edit/" + id)
+                .then(res => {
+                    this.edit_id = res.data.editpeople[0]
+                    this.edit_nome = res.data.editpeople[1]
+                    this.edit_rg = res.data.editpeople[2]
+                    this.edit_cpf = res.data.editpeople[3]
+                    this.edit_data_nascimento = res.data.editpeople[4]
+                    this.edit_data_admissao= res.data.editpeople[5]
+                    this.edit_funcao = res.data.editpeople[6]
+                    app.showModal('my-modal1')
+                })
+                .catch(err => {
+                  console.log(err)
+                })
+            },
+
+            allDataById(id){
+                axios.get("http://127.0.0.1:5000/all_data_by_id/" + id)
+                .then(res => {
+                    this.edit_id = res.data.editpeople[0]
+                    this.edit_nome = res.data.editpeople[1]
+                    this.edit_rg = res.data.editpeople[2]
+                    this.edit_cpf = res.data.editpeople[3]
+                    this.edit_data_nascimento = res.data.editpeople[4]
+                    this.edit_data_admissao= res.data.editpeople[5]
+                    this.edit_funcao = res.data.editpeople[6]
+                    app.showModal('modal-ver-mais')
+                })
+                .catch(err => {
+                  console.log(err)
+                })
+            },
+             
+            onUpdate(){
+                if (this.edit_nome !== '' && this.edit_rg !== '' && this.edit_cpf !== '' && this.edit_id !== '' && this.edit_data_nascimento !== '' && this.edit_data_admissao !== '' && this.edit_funcao !== '') {
+ 
+                    var config = { headers: {  
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'}
+                    }
+                    axios.post("http://127.0.0.1:5000/update", 
+                        { edit_id : this.edit_id, edit_nome : this.edit_nome, edit_rg : this.edit_rg, edit_cpf : this.edit_cpf, edit_data_nascimento : this.edit_data_nascimento, edit_data_admissao : this.edit_data_admissao, edit_funcao : this.edit_funcao}, config
+                    )
+                    .then(res => {
+                        console.log(res)
+                        alert('Registro atualizado com sucesso!');
+          
+                        this.edit_nome = '';
+                        this.edit_rg = '';
+                        this.edit_cpf = '';
+                        this.edit_data_nascimento = '';
+                        this.edit_data_admissao = '';
+                        this.edit_funcao = '';
+          
+                        app.hideModal('my-modal1');
+                        app.getRecords();
+                    })
+                      .catch(err => {
+                        console.log(err)
+                    })
+      
+                }else{
+                  alert('empty')
+                }
+            },
+             
+            deleteRegister(id){
+                if (window.confirm('Excluir esse registro ?')) {
+                    axios.get("http://127.0.0.1:5000/delete/" + id)
+                    .then(res => {
+                        console.log(res)
+                        alert('Excluido com sucesso!')
+                        app.getRecords();
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+                }
+            },
+         
+        },
+           
+        mounted: function(){
+          this.getRecords()
+        }
+    })
+</script>
+</body>   
 </html>
